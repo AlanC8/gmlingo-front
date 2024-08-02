@@ -67,7 +67,6 @@ const ChatGPT: React.FC = () => {
             <h3 className="text-2xl font-semibold mb-4">Ответ:</h3>
             <div className="prose">
               <ReactMarkdown
-                children={answer}
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
@@ -101,7 +100,9 @@ const ChatGPT: React.FC = () => {
                     />
                   ),
                 }}
-              />
+              >
+                {answer}
+              </ReactMarkdown>
             </div>
           </div>
         )}

@@ -29,7 +29,7 @@ ChartJS.register(
 
 const StocksDetail: React.FC = () => {
   const router = useRouter();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>() || { id: "" };
   const stock = stocks.find((stock) => stock.id === parseInt(id as string, 10));
 
   if (!stock) {

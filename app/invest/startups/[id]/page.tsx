@@ -30,7 +30,7 @@ ChartJS.register(
 
 const StartupPage = () => {
   const params = useParams<{ id: string }>();
-  const startup = startups[parseInt(params.id as string) - 1];
+  const startup = params ? startups[parseInt(params.id as string) - 1] : null;
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleBurgerMenu = () => {

@@ -8,7 +8,7 @@ import BurgerMenu from "../../alanComponents/Burget";
 import Confetti from "react-confetti";
 
 const Page = () => {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
   const router = useRouter();
   const [showTest, setShowTest] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +16,7 @@ const Page = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [congrulations, setCongrulations] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("KZ");
-  const [item, setItem] = useState(syllabuskz[+id - 1]);
+  const [item, setItem] = useState(syllabuskz[+(params?.id ?? 0) - 1]);
 
   const toggleBurgerMenu = () => {
     setIsBurgerOpen(!isBurgerOpen);
@@ -32,11 +32,11 @@ const Page = () => {
 
   useEffect(() => {
     if (selectedLanguage === "KZ") {
-      setItem(syllabuskz[+id - 1]);
+      setItem(syllabuskz[+(params?.id ?? 0) - 1]);
     } else {
-      setItem(syllabus[+id - 1]);
+      setItem(syllabus[+(params?.id ?? 0) - 1]);
     }
-  }, [selectedLanguage, id]);
+  }, [selectedLanguage, +(params?.id ?? 0)]);
 
   const handleCheckAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,8 +56,8 @@ const Page = () => {
   };
 
   const handleNextLesson = () => {
-    if (+id < 5) {
-      router.push(`/halyklingo/${parseInt(id, 10) + 1}`);
+    if (+(params?.id ?? 0) < 5) {
+      router.push(`/halyklingo/${Array.isArray(params?.id) ? parseInt(params.id[0], 10) + 1 : parseInt(params?.id ?? "0", 10) + 1}`);
     } else {
       setCongrulations(true);
     }
